@@ -1,0 +1,33 @@
+
+<?xml version='1.0' encoding='utf-8'?>
+<data>
+  <movies>
+    <movie>
+      <title>Начало</title>
+      <duration>148</duration>
+      <rating>3.4</rating>
+    </movie>
+    <movie>
+      <title>Матрица</title>
+      <duration>136</duration>
+      <rating>4.9</rating>
+    </movie>
+    <movie>
+      <title>Жизнь Пи</title>
+      <duration>180</duration>
+      <rating>5.0</rating>
+    </movie>
+    <movie>
+      <title>sdf</title>
+      <duration>213</duration>
+      <rating>4.0</rating>
+    </movie>
+  </movies>
+  <serials>
+    <serial>
+      <title>Во все тяжкие</title>
+      <num_of_ep>93</num_of_ep>
+      <rating>4.8</rating>
+    </serial>
+  </serials>
+</data>
