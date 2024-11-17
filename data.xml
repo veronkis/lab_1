@@ -1,5 +1,4 @@
-
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <data>
   <movies>
     <movie>
@@ -18,9 +17,9 @@
       <rating>5.0</rating>
     </movie>
     <movie>
-      <title>sdf</title>
-      <duration>213</duration>
-      <rating>4.0</rating>
+      <title>Титаник</title>
+      <duration>40</duration>
+      <rating>5.0</rating>
     </movie>
   </movies>
   <serials>
@@ -30,4 +29,11 @@
       <rating>4.8</rating>
     </serial>
   </serials>
+  <user>
+    <username>veronika</username>
+    <browsing_history>
+      <item>три богатря </item>
+      <item>лунтик</item>
+    </browsing_history>
+  </user>
 </data>

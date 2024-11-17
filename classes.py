@@ -1,5 +1,6 @@
 import json 
 import xml.etree.ElementTree as et
+from xml.dom import minidom
 
 #-----------------------------------------------
 
@@ -11,21 +12,10 @@ filenamejson = "data.json"
 class XmlHandler:
 
     # Функция для красивых отступов 
-    def indent(elem, level = 0) -> None:
-        i = "\n" + level * "  "
-        if len(elem):
-            if not elem.text or not elem.text.strip():
-                elem.text = i + "  "
-            if not elem.tail or not elem.tail.strip():
-                elem.tail = i
-            for subelem in elem:
-                XmlHandler.indent(subelem, level + 1)
-            if not subelem.tail or not subelem.tail.strip():
-                subelem.tail = i
-        else:
-            if level and (not elem.tail or not elem.tail.strip()):
-                elem.tail = i
-        pass
+    def indent(element):
+        rough_string = et.tostring(element, encoding='utf-8')
+        parsed = minidom.parseString(rough_string)
+        return parsed.toprettyxml(indent="  ")
 
     # Функция сохранения информации в xml
     def save_to_xml(data) -> None:
@@ -44,16 +34,24 @@ class XmlHandler:
             for key, value in series.items():
                 child = et.SubElement(series_element, key)
                 child.text = str(value)  
+       
+        for user_data in data['users']:
+            # Создаем элемент для пользователя
+            user_element = et.Element("user")
+            username_element = et.SubElement(user_element, "username")
+            username_element.text = user_data["username"]
 
-        # Добавляем отступы для красивого форматирования
-        XmlHandler.indent(root)
+            browsing_history_element = et.SubElement(user_element, "browsing_history")
+            for item in user_data["browsing_history"]:
+                history_item = et.SubElement(browsing_history_element, "item")
+                history_item.text = item
 
-        # Создаем дерево XML и записываем его в файл
-        tree = et.ElementTree(root)
-        tree.write(filenamexml, encoding='utf-8', xml_declaration=True)
+        # Добавляем пользователя в корневой элемент
+        root.append(user_element)
 
-        print(f"Данные успешно сохранены в файл '{filenamexml}'")
-        pass
+        # Сохраняем в файл
+        with open(filenamexml, "w", encoding="utf-8") as f:
+            f.write(XmlHandler.indent(root))
 
     # Функция чтения информации из xml
     def load_from_xml() -> dict:
@@ -300,3 +298,41 @@ class Film(Media):
 
     def __str__(self) -> str:
         return f"Фильм: {self.title}, хронометраж: {self.duration}, рейтинг: {self.rating}"
+
+#-----------------------------------------------
+
+class User:
+    username = ""
+    browsing_history = []
+
+    def __init__(self, inp_username = "") -> None:
+        self.username = inp_username
+        pass
+  
+    def set_username(self) -> None:
+        inp_username = input("Введите имя пользователя: ")
+        self.username = inp_username
+        pass
+
+    def set_browsing_history(self) -> None:
+        while True:
+            media = input("Введите название просмотренного контента: ")
+            self.browsing_history.append(media)
+            if input("Продолжить? (1/0)") != "1":
+                break
+        pass
+
+    def get_username(self) -> str:
+        return self.username
+
+    def get_browsing_history(self) -> list:
+        return self.browsing_history
+    
+    def to_dict(self) -> dict:
+        return {
+            "username": self.username,
+            "browsing_history": self.browsing_history
+        }
+
+    def __str__(self) -> str:
+        return f"Пользователь: {self.username}, истории просмотра: {self.browsing_history}"

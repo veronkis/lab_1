@@ -14,6 +14,11 @@
             "title": "\u0416\u0438\u0437\u043d\u044c \u041f\u0438",
             "duration": 180,
             "rating": 5.0
+        },
+        {
+            "title": "\u0422\u0438\u0442\u0430\u043d\u0438\u043a",
+            "duration": 40,
+            "rating": 5.0
         }
     ],
     "serials": [
@@ -21,6 +26,15 @@
             "title": "\u0412\u043e \u0432\u0441\u0435 \u0442\u044f\u0436\u043a\u0438\u0435",
             "num_of_ep": 93,
             "rating": 4.8
+        }
+    ],
+    "users": [
+        {
+            "username": "veronika",
+            "browsing_history": [
+                "\u043b\u0443\u043d\u0442\u0438\u043a",
+                "\u0433\u0443\u0431\u043a\u0430 \u0431\u043e\u0431"
+            ]
         }
     ]
 }
